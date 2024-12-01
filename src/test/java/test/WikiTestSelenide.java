@@ -15,7 +15,6 @@ public class WikiTestSelenide {
     static void beforeAll(){
         Configuration.baseUrl = "https://github.com";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.holdBrowserOpen = true;
     }
 
     @Test
@@ -23,8 +22,9 @@ public class WikiTestSelenide {
     void WeNeedJunitCode() {
         open("/selenide/selenide");
         $("#wiki-tab").click();
-        $("#wiki-body").shouldHave(text("Soft assertions"));
-        $("#wiki-body").$(byText("Soft assertions")).click();
+        $("#wiki-pages-filter").setValue("SoftAssertions");
+        $("#wiki-pages-box").shouldHave(text("SoftAssertions"));
+        $("#wiki-pages-box").$(byText("SoftAssertions")).click();
         $("#wiki-body").shouldHave(text(
                         "@ExtendWith({SoftAssertsExtension.class})\n" +
                         "class Tests {\n" +
